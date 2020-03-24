@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>ARIX IPAM</title>
+
+    <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+    <h5 class="my-0 mr-md-auto font-weight-normal">ARIX IPAM</h5>
+    <nav class="my-2 my-md-0 mr-md-3">
+        <a class="p-2 text-dark">{{ available }} available /48s</a>
+    </nav>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#assignment">Assign</button>
+</div>
+
+<div class="px-3 py-3 mx-auto text-center"></div>
+
+<div class="container">
+    <div class="card-deck mb-3 text-center">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Prefix</th>
+                <th>Netname</th>
+                <th>Description</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {{ assigned }}
+            </tbody>
+        </table>
+    </div>
+
+    <footer class="pt-4 my-md-5 pt-md-5 border-top">
+        <div class="row">
+            <div class="col-12 col-md">
+                <img class="mb-2" src="https://arix.dev/images/arix.png" alt="" width="120px">
+                <small class="d-block mb-3 text-muted">&copy; ARIX 2020</small>
+            </div>
+            <div class="col-6 col-md">
+                <h5>Links</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a class="text-muted" href="https://arix.dev/">ARIX</a></li>
+                    <li><a class="text-muted" href="https://arix.dev/exchange">Exchange</a></li>
+                    <li><a class="text-muted" href="https://arix.dev/peering">Peering</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md"></div>
+            <div class="col-6 col-md"></div>
+        </div>
+    </footer>
+</div>
+
+<!-- Assignment Modal -->
+<div class="modal fade" id="assignment" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Assign Prefix</h5>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="/assign">
+                    <div class="form-group">
+                        <label for="prefix">Prefix</label>
+                        <input disabled="disabled" type="text" class="form-control" id="prefix"
+                               value="{{ next_prefix }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="callsign">Callsign</label>
+                        <input type="text" class="form-control" id="callsign" name="callsign" placeholder="N7ARX">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="purpose">Purpose</label>
+                        <input type="text" class="form-control" id="purpose" name="purpose" placeholder="IPv6 anycast testing">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>
