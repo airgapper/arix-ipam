@@ -10,7 +10,21 @@ class IPAMDatabase:
 
         # Collections
         self.prefixes = self._db["prefixes"]
+
         self.config = self._db["config"].find_one({})
+
+        if self.config is None:
+            self._db["config"].drop()
+            self._db["config"].insert_one({
+                "prefix": "",
+                "mnt": "",
+                "admin-c": "",
+                "tech-c": "",
+                "org": "",
+                "country": ""
+            })
+            print("ERROR: MongoDB config is empty. Empty config is ready in \"config\".")
+            exit()
 
         self.aggregate = ipaddress.ip_network(self.config["prefix"])
         if self.aggregate.prefixlen >= 48:
